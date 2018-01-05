@@ -1,0 +1,12 @@
+##Plot2
+library(dplyr)
+library(tidyr)
+library(lubridate)
+setwd("C:/Users/bbates.FIDELITONE/Documents/DataScience")
+data1 <- read.table("household_power_consumption.txt",header = FALSE,sep = ";",skip = 66637, nrows = 2880)
+date <- with(data1,dmy(data1$V1) + hms(data1$V2))
+data1 <- cbind(data1,date)
+data1<- tbl_df(data1)
+png(filename="Plot2.png",width = 480, height = 480)
+plot(data1$date,data1$V3,type="l",main = "",xlab = "", ylab = "Global Active Power (kilowatts)")
+dev.off()
